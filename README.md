@@ -125,6 +125,14 @@ Expected output:
 bongodoro-cat.nvim smoke ok: frames=36x12
 ```
 
+## Health Check
+
+Run Neovim's built-in health check:
+
+```vim
+:checkhealth bongo_cat
+```
+
 ## Roadmap
 
 - Pomodoro-specific visual polish for work and break states.

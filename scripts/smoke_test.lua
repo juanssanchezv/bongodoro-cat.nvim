@@ -13,6 +13,7 @@ local animator = require("bongo_cat.animator")
 local events = require("bongo_cat.events")
 local window = require("bongo_cat.window")
 local pomodoro = require("bongo_cat.pomodoro")
+local health = require("bongo_cat.health")
 local bongo = require("bongo_cat")
 
 config.setup({
@@ -44,6 +45,8 @@ assert_true(height > 0, "expected positive frame height")
 for _, name in ipairs(frames.order) do
   assert_true(#frames.get(name) == height, name .. " frame height mismatch")
 end
+
+assert_true(type(health.check) == "function", "health check is not available")
 
 local rendered = {}
 animator.start(function(frame)
