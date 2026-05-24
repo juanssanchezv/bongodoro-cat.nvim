@@ -11,6 +11,7 @@ local config = require("bongo_cat.config")
 local frames = require("bongo_cat.frames")
 local animator = require("bongo_cat.animator")
 local events = require("bongo_cat.events")
+local window = require("bongo_cat.window")
 local bongo = require("bongo_cat")
 
 config.setup({
@@ -84,6 +85,60 @@ assert_true(animator.state.current == "left" or animator.state.current == "right
 animator.destroy()
 
 events.setup()
+local error_events = 0
+local original_on_event = animator.on_event
+local original_is_visible = window.is_visible
+window.is_visible = function()
+  return true
+end
+animator.on_event = function(name)
+  if name == "error" then
+    error_events = error_events + 1
+  end
+end
+
+local buf = vim.api.nvim_create_buf(false, true)
+vim.diagnostic.set(vim.api.nvim_create_namespace("bongodoro-smoke"), buf, {
+  {
+    lnum = 0,
+    col = 0,
+    message = "smoke error",
+    severity = vim.diagnostic.severity.ERROR,
+  },
+})
+vim.wait(120, function()
+  return error_events == 1
+end)
+assert_true(error_events == 1, "diagnostic error did not trigger once")
+
+vim.diagnostic.set(vim.api.nvim_create_namespace("bongodoro-smoke"), buf, {
+  {
+    lnum = 0,
+    col = 1,
+    message = "same smoke error",
+    severity = vim.diagnostic.severity.ERROR,
+  },
+})
+vim.wait(50)
+assert_true(error_events == 1, "diagnostic error retriggered while errors persisted")
+
+vim.diagnostic.reset(vim.api.nvim_create_namespace("bongodoro-smoke"), buf)
+vim.wait(50)
+vim.diagnostic.set(vim.api.nvim_create_namespace("bongodoro-smoke"), buf, {
+  {
+    lnum = 0,
+    col = 2,
+    message = "new smoke error",
+    severity = vim.diagnostic.severity.ERROR,
+  },
+})
+vim.wait(120, function()
+  return error_events == 2
+end)
+assert_true(error_events == 2, "diagnostic error did not retrigger after clearing")
+vim.api.nvim_buf_delete(buf, { force = true })
+animator.on_event = original_on_event
+window.is_visible = original_is_visible
 events.cleanup()
 
 bongo.setup({ auto_start = false })

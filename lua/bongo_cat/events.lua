@@ -6,6 +6,7 @@ local M = {
   state = {
     augroup = nil,
     ns = nil,
+    error_counts = {},
   },
 }
 
@@ -93,9 +94,17 @@ local function on_error(args)
   end
 
   local diagnostics = vim.diagnostic.get(args.buf, { severity = vim.diagnostic.severity.ERROR })
-  if #diagnostics > 0 then
+  local previous = M.state.error_counts[args.buf] or 0
+  local current = #diagnostics
+  M.state.error_counts[args.buf] = current
+
+  if previous == 0 and current > 0 then
     animator.on_event("error")
   end
+end
+
+local function on_buffer_delete(args)
+  M.state.error_counts[args.buf] = nil
 end
 
 function M.setup()
@@ -120,6 +129,11 @@ function M.setup()
     group = M.state.augroup,
     callback = on_error,
   })
+
+  vim.api.nvim_create_autocmd("BufDelete", {
+    group = M.state.augroup,
+    callback = on_buffer_delete,
+  })
 end
 
 function M.cleanup()
@@ -131,6 +145,8 @@ function M.cleanup()
     pcall(vim.api.nvim_del_augroup_by_id, M.state.augroup)
     M.state.augroup = nil
   end
+
+  M.state.error_counts = {}
 end
 
 return M
