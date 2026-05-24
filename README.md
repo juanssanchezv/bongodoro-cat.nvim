@@ -8,7 +8,7 @@ Neovim Bongo Cat plugin with a Unicode sprite, a floating window renderer, and a
 - Runs a randomized idle animation after 5-15 seconds without input.
 - Enters sleep after 45 seconds without input.
 - Shows a save reaction after `:write`.
-- Shows an error reaction when diagnostics report errors.
+- Can show an error reaction when diagnostics report errors.
 - Renders in a configurable floating window.
 
 ## Installation
@@ -56,6 +56,10 @@ require("bongo_cat").setup({
     sleep_tick = 700,
     event_tick = 700,
   },
+  events = {
+    save = true,
+    error = false,
+  },
 })
 ```
 
@@ -81,7 +85,7 @@ Suggested checks:
 - stop typing and wait 5-15 seconds to verify the randomized idle animation
 - wait 45 seconds without typing to verify `sleep`
 - write a buffer with `:write` to verify the `save` reaction
-- run `:lua require("bongo_cat.animator").on_event("error")` to verify the `error` reaction
+- run `:lua require("bongo_cat.animator").on_event("error")` to verify the manual `error` reaction
 - use `<leader>bt` to toggle the cat during testing
 
 ## Smoke Test

@@ -26,6 +26,9 @@ config.setup({
     sleep_tick = 10,
     event_tick = 10,
   },
+  events = {
+    error = true,
+  },
 })
 
 local width, height = frames.dimensions()

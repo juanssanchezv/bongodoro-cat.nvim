@@ -21,7 +21,7 @@ M.defaults = {
   },
   events = {
     save = true,
-    error = true,
+    error = false,
   },
   input = {
     enabled_mode_prefixes = { "i", "R", "c", "r" },
