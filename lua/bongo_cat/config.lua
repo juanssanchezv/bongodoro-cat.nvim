@@ -23,6 +23,16 @@ M.defaults = {
     save = true,
     error = false,
   },
+  pomodoro = {
+    enabled = true,
+    work_minutes = 25,
+    short_break_minutes = 5,
+    long_break_minutes = 15,
+    sessions_until_long_break = 4,
+    auto_start_breaks = false,
+    auto_start_work = false,
+    show_timer = true,
+  },
   input = {
     enabled_mode_prefixes = { "i", "R", "c", "r" },
     count_backspace = true,

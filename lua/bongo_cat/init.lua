@@ -1,6 +1,7 @@
 local animator = require("bongo_cat.animator")
 local config = require("bongo_cat.config")
 local frames = require("bongo_cat.frames")
+local pomodoro = require("bongo_cat.pomodoro")
 local events = require("bongo_cat.events")
 local window = require("bongo_cat.window")
 
@@ -81,11 +82,31 @@ function M.status()
   return {
     setup = M.state.setup,
     visible = window.is_visible(),
+    pomodoro = pomodoro.status(),
   }
+end
+
+function M.pomodoro(command)
+  ensure_setup()
+
+  if command == "start" then
+    return pomodoro.start("work")
+  elseif command == "pause" then
+    return pomodoro.pause()
+  elseif command == "resume" then
+    return pomodoro.resume()
+  elseif command == "stop" then
+    return pomodoro.stop()
+  elseif command == "status" or not command then
+    return pomodoro.status()
+  end
+
+  return nil, "Unknown pomodoro command: " .. tostring(command)
 end
 
 function M.cleanup()
   animator.destroy()
+  pomodoro.cleanup()
   events.cleanup()
   window.close()
   M.state.setup = false

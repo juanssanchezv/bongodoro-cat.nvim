@@ -12,6 +12,7 @@ local frames = require("bongo_cat.frames")
 local animator = require("bongo_cat.animator")
 local events = require("bongo_cat.events")
 local window = require("bongo_cat.window")
+local pomodoro = require("bongo_cat.pomodoro")
 local bongo = require("bongo_cat")
 
 config.setup({
@@ -28,6 +29,11 @@ config.setup({
   },
   events = {
     error = true,
+  },
+  pomodoro = {
+    work_minutes = 0.001,
+    short_break_minutes = 0.001,
+    long_break_minutes = 0.001,
   },
 })
 
@@ -49,6 +55,22 @@ assert_true(#rendered >= 1, "animator did not render initial frame")
 animator.on_input()
 animator.on_input()
 assert_true(#rendered >= 3, "input did not render left/right frames")
+
+assert_true(pomodoro.start(), "pomodoro did not start")
+local status = pomodoro.status()
+assert_true(status.mode == "work", "pomodoro did not enter work mode")
+assert_true(status.remaining:match("^%d%d:%d%d$"), "pomodoro remaining format is invalid")
+
+local decorated = pomodoro.decorate(frames.get("right"))
+assert_true(decorated ~= frames.get("right"), "pomodoro did not clone decorated frame")
+assert_true(decorated[1] ~= frames.get("right")[1], "pomodoro timer overlay did not render")
+
+assert_true(pomodoro.pause(), "pomodoro did not pause")
+assert_true(pomodoro.status().mode == "paused", "pomodoro pause mode mismatch")
+assert_true(pomodoro.resume(), "pomodoro did not resume")
+assert_true(pomodoro.status().mode == "work", "pomodoro resume mode mismatch")
+assert_true(pomodoro.stop(), "pomodoro did not stop")
+assert_true(pomodoro.status().mode == "stopped", "pomodoro stop mode mismatch")
 
 local saw_save = false
 animator.on_event("save")
@@ -145,8 +167,12 @@ window.is_visible = original_is_visible
 events.cleanup()
 
 bongo.setup({ auto_start = false })
-local status = bongo.status()
-assert_true(status.setup == true, "plugin setup status is false")
+local plugin_status = bongo.status()
+assert_true(plugin_status.setup == true, "plugin setup status is false")
+assert_true(plugin_status.pomodoro.mode == "stopped", "plugin pomodoro status mismatch")
+assert_true(bongo.pomodoro("start"), "plugin pomodoro start failed")
+assert_true(bongo.pomodoro("status").mode == "work", "plugin pomodoro command status mismatch")
+assert_true(bongo.pomodoro("stop"), "plugin pomodoro stop failed")
 bongo.cleanup()
 
 print(string.format("bongodoro-cat.nvim smoke ok: frames=%dx%d", width, height))

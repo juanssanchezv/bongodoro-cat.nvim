@@ -1,5 +1,6 @@
 local config = require("bongo_cat.config")
 local frames = require("bongo_cat.frames")
+local pomodoro = require("bongo_cat.pomodoro")
 
 local uv = vim.uv or vim.loop
 
@@ -62,7 +63,7 @@ local function render(name)
     M.state.last_side = name
   end
   if M.state.render then
-    M.state.render(frames.get(name))
+    M.state.render(pomodoro.decorate(frames.get(name)))
   end
 end
 
@@ -198,6 +199,11 @@ function M.start(render_fn)
   M.state.pending_event = nil
   M.state.last_input_at = now_ms()
   M.state.sleeping = false
+  pomodoro.set_redraw(function()
+    if M.state.running and M.state.current then
+      render(M.state.current)
+    end
+  end)
   render(current_side_frame())
   schedule(random_idle_delay(), start_idle_loop)
 end
@@ -208,6 +214,7 @@ function M.stop()
   M.state.pending_hit = nil
   M.state.pending_event = nil
   M.state.sleeping = false
+  pomodoro.set_redraw(nil)
   stop_timer()
 end
 

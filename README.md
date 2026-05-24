@@ -9,6 +9,7 @@ Neovim Bongo Cat plugin with a Unicode sprite, a floating window renderer, and a
 - Enters sleep after 45 seconds without input.
 - Shows a save reaction after `:write`.
 - Can show an error reaction when diagnostics report errors.
+- Shows an optional Pomodoro timer overlay while the cat keeps animating normally.
 - Renders in a configurable floating window.
 
 ## Installation
@@ -60,6 +61,16 @@ require("bongo_cat").setup({
     save = true,
     error = false,
   },
+  pomodoro = {
+    enabled = true,
+    work_minutes = 25,
+    short_break_minutes = 5,
+    long_break_minutes = 15,
+    sessions_until_long_break = 4,
+    auto_start_breaks = false,
+    auto_start_work = false,
+    show_timer = true,
+  },
 })
 ```
 
@@ -70,6 +81,17 @@ require("bongo_cat").setup({
 - `:BongoCat show` shows the cat.
 - `:BongoCat hide` hides the cat.
 - `:BongoCat status` prints setup/visibility status.
+- `:BongoCat pomodoro start` starts a work timer.
+- `:BongoCat pomodoro pause` pauses the active timer.
+- `:BongoCat pomodoro resume` resumes a paused timer.
+- `:BongoCat pomodoro stop` stops the active timer.
+- `:BongoCat pomodoro status` prints Pomodoro status.
+
+## Pomodoro
+
+Pomodoro runs as an overlay on top of the current cat animation. The cat keeps typing, idling, sleeping, and reacting to save/error normally while the timer is active.
+
+By default breaks do not start automatically. When a work session completes, Bongodoro Cat shows a notification and waits for the next command.
 
 ## Visual test
 
@@ -86,6 +108,7 @@ Suggested checks:
 - wait 45 seconds without typing to verify `sleep`
 - write a buffer with `:write` to verify the `save` reaction
 - run `:lua require("bongo_cat.animator").on_event("error")` to verify the manual `error` reaction
+- run `:BongoCat pomodoro start` to verify the Pomodoro overlay
 - use `<leader>bt` to toggle the cat during testing
 
 ## Smoke Test
@@ -104,4 +127,4 @@ bongodoro-cat.nvim smoke ok: frames=36x12
 
 ## Roadmap
 
-- Pomodoro timer integration with timer state shown in the animation.
+- Pomodoro-specific visual polish for work and break states.
