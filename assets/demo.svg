@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">bongodoro-cat.nvim demo</title>
+  <desc id="desc">A terminal style preview of Bongodoro Cat with a Pomodoro timer overlay.</desc>
+  <rect width="960" height="420" rx="24" fill="#11111b"/>
+  <rect x="32" y="32" width="896" height="356" rx="16" fill="#1e1e2e" stroke="#313244" stroke-width="2"/>
+  <text x="64" y="76" fill="#cdd6f4" font-size="24" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-weight="700">bongodoro-cat.nvim</text>
+  <text x="64" y="110" fill="#a6adc8" font-size="15" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace">typing • idle • sleep • save • pomodoro overlay</text>
+  <text x="96" y="152" fill="#f5e0dc" font-size="20" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" xml:space="preserve">
+    <tspan x="96" dy="0">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣶⣄⠀⠀⠀⠀25:00⠀⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠿⠁⠈⢻⣧⣄WORK⠀⠀⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⠟⠋⠁⠀⠀⠀⠀⠀⠀⠉⠙⠻⠷⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⣴⡿⠛⠻⣷⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣶⣤⣤⡶⢿⣷⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⣿⠀⠀⠀⠈⠛⠀⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⢸⡟⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⣿⣀⡀⠀⠀⠀⠀⠀⠀⠉⠉⠘⠷⢾⣧⣤⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠉⠉⠛⠻⠷⠶⣦⣤⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠇⠀⠀⠀⠀⠀⠀⠀⠸⣿⡀⠀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠶⢶⣤⣤⣀⣀⣠⣤⠀⠀⠀⠀⠀⠀⠀⠀⠘⣷⡀⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⢹⡟⠁⠀⠀⠀⢀⣀⣠⣄⡀⠀⠸⣷⠀</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣤⡌⠻⠶⠶⠶⠟⠛⠉⠉⠙⠛⠻⠷⠿⠆</tspan>
+    <tspan x="96" dy="22">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠿⠄⠀⠸⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</tspan>
+  </text>
+  <rect x="64" y="344" width="832" height="1" fill="#313244"/>
+  <text x="64" y="370" fill="#a6e3a1" font-size="15" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace">:BongoCat pomodoro start</text>
+</svg>

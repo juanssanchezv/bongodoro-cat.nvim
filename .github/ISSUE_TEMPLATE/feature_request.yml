@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest an idea or improvement.
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for suggesting an improvement for bongodoro-cat.nvim.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What would you like to add or change?
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why would this be useful?
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Proposed design
+      description: If this is visual, include ASCII/Unicode mockups when possible.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: I am willing to help test this change.
+        - label: I can provide visual frame art or mockups.

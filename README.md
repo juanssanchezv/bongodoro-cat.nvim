@@ -1,6 +1,8 @@
 # bongodoro-cat.nvim
 
-Neovim Bongo Cat plugin with a Unicode sprite, a floating window renderer, and a small animation engine for typing, idle, sleep, save, and error reactions. Pomodoro timer integration is planned.
+Neovim Bongo Cat plugin with a Unicode sprite, a floating window renderer, and a small animation engine for typing, idle, sleep, save, error, and Pomodoro timer reactions.
+
+![bongodoro-cat.nvim demo](./assets/demo.svg)
 
 ## Features
 
