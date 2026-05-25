@@ -73,6 +73,26 @@ require("bongo_cat").setup({
     auto_start_work = false,
     show_timer = true,
   },
+  keymaps = {
+    toggle = "<leader>bc",
+    pomodoro_start = nil,
+    pomodoro_pause_resume = nil,
+    pomodoro_stop = nil,
+    pomodoro_status = nil,
+  },
+})
+```
+
+Pomodoro keymaps are disabled by default. Enable only the bindings you want:
+
+```lua
+require("bongo_cat").setup({
+  keymaps = {
+    pomodoro_start = "<leader>ps",
+    pomodoro_pause_resume = "<leader>pp",
+    pomodoro_stop = "<leader>px",
+    pomodoro_status = "<leader>pi",
+  },
 })
 ```
 
@@ -85,6 +105,7 @@ require("bongo_cat").setup({
 - `:BongoCat status` prints setup/visibility status.
 - `:BongoCat pomodoro start` starts a work timer.
 - `:BongoCat pomodoro pause` pauses the active timer.
+- `:BongoCat pomodoro pause_resume` toggles pause/resume.
 - `:BongoCat pomodoro resume` resumes a paused timer.
 - `:BongoCat pomodoro stop` stops the active timer.
 - `:BongoCat pomodoro status` prints Pomodoro status.
@@ -126,6 +147,10 @@ Expected output:
 ```text
 bongodoro-cat.nvim smoke ok: frames=36x12
 ```
+
+## CI
+
+The GitHub Actions workflow runs the smoke test and health check on pushes and pull requests to `main`.
 
 ## Health Check
 

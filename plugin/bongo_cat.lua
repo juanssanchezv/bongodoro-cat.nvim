@@ -52,7 +52,7 @@ end, {
   nargs = "*",
   complete = function(_, line)
     if line:match("^%s*BongoCat%s+pomodoro%s+") then
-      return { "start", "pause", "resume", "stop", "status" }
+      return { "start", "pause", "pause_resume", "resume", "stop", "status" }
     end
     return { "toggle", "show", "hide", "status", "pomodoro" }
   end,

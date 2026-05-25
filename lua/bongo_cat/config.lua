@@ -43,6 +43,10 @@ M.defaults = {
   auto_start = true,
   keymaps = {
     toggle = "<leader>bc",
+    pomodoro_start = nil,
+    pomodoro_pause_resume = nil,
+    pomodoro_stop = nil,
+    pomodoro_status = nil,
   },
 }
 

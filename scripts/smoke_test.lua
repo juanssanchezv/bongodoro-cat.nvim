@@ -36,6 +36,12 @@ config.setup({
     short_break_minutes = 0.001,
     long_break_minutes = 0.001,
   },
+  keymaps = {
+    pomodoro_start = "<leader>ps",
+    pomodoro_pause_resume = "<leader>pp",
+    pomodoro_stop = "<leader>px",
+    pomodoro_status = "<leader>pi",
+  },
 })
 
 local width, height = frames.dimensions()
@@ -175,6 +181,10 @@ assert_true(plugin_status.setup == true, "plugin setup status is false")
 assert_true(plugin_status.pomodoro.mode == "stopped", "plugin pomodoro status mismatch")
 assert_true(bongo.pomodoro("start"), "plugin pomodoro start failed")
 assert_true(bongo.pomodoro("status").mode == "work", "plugin pomodoro command status mismatch")
+assert_true(bongo.pomodoro("pause_resume"), "plugin pomodoro pause/resume pause failed")
+assert_true(bongo.pomodoro("status").mode == "paused", "plugin pomodoro pause/resume did not pause")
+assert_true(bongo.pomodoro("pause_resume"), "plugin pomodoro pause/resume resume failed")
+assert_true(bongo.pomodoro("status").mode == "work", "plugin pomodoro pause/resume did not resume")
 assert_true(bongo.pomodoro("stop"), "plugin pomodoro stop failed")
 bongo.cleanup()
 

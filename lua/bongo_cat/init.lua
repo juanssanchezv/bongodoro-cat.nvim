@@ -8,8 +8,18 @@ local window = require("bongo_cat.window")
 local M = {
   state = {
     setup = false,
+    keymaps = {},
   },
 }
+
+local function set_keymap(key, callback, desc)
+  if not key then
+    return
+  end
+
+  vim.keymap.set("n", key, callback, { desc = desc, silent = true })
+  table.insert(M.state.keymaps, key)
+end
 
 local function ensure_setup()
   if not M.state.setup then
@@ -26,12 +36,25 @@ function M.setup(opts)
   config.setup(opts)
   events.setup()
 
-  local keymap = config.get("keymaps.toggle")
-  if keymap then
-    vim.keymap.set("n", keymap, function()
-      M.toggle()
-    end, { desc = "Toggle Bongo Cat", silent = true })
-  end
+  set_keymap(config.get("keymaps.toggle"), function()
+    M.toggle()
+  end, "Toggle Bongo Cat")
+
+  set_keymap(config.get("keymaps.pomodoro_start"), function()
+    M.pomodoro("start")
+  end, "Start Bongodoro Pomodoro")
+
+  set_keymap(config.get("keymaps.pomodoro_pause_resume"), function()
+    M.pomodoro("pause_resume")
+  end, "Pause or resume Bongodoro Pomodoro")
+
+  set_keymap(config.get("keymaps.pomodoro_stop"), function()
+    M.pomodoro("stop")
+  end, "Stop Bongodoro Pomodoro")
+
+  set_keymap(config.get("keymaps.pomodoro_status"), function()
+    M.pomodoro("status")
+  end, "Show Bongodoro Pomodoro status")
 
   if config.get("auto_start") then
     vim.schedule(function()
@@ -93,6 +116,11 @@ function M.pomodoro(command)
     return pomodoro.start("work")
   elseif command == "pause" then
     return pomodoro.pause()
+  elseif command == "pause_resume" then
+    if pomodoro.status().mode == "paused" then
+      return pomodoro.resume()
+    end
+    return pomodoro.pause()
   elseif command == "resume" then
     return pomodoro.resume()
   elseif command == "stop" then
@@ -109,6 +137,10 @@ function M.cleanup()
   pomodoro.cleanup()
   events.cleanup()
   window.close()
+  for _, key in ipairs(M.state.keymaps) do
+    pcall(vim.keymap.del, "n", key)
+  end
+  M.state.keymaps = {}
   M.state.setup = false
 end
 
