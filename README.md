@@ -1,5 +1,9 @@
 # bongodoro-cat.nvim
 
+[![CI](https://github.com/juanssanchezv/bongodoro-cat.nvim/actions/workflows/ci.yml/badge.svg)](https://github.com/juanssanchezv/bongodoro-cat.nvim/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/juanssanchezv/bongodoro-cat.nvim?style=flat-square)](https://github.com/juanssanchezv/bongodoro-cat.nvim/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 Neovim Bongo Cat plugin with a Unicode sprite, a floating window renderer, and a small animation engine for typing, idle, sleep, save, error, and Pomodoro timer reactions.
 
 ![bongodoro-cat.nvim demo](./assets/demo.svg)
